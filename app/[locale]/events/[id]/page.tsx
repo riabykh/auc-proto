@@ -11,6 +11,8 @@ import { cn } from '@/lib/utils'
 
 export default function EventDetailPage({ params }: { params: { id: string } }) {
     const event = AUCTION_EVENTS.find(e => e.id === params.id)
+    const startTime = event ? event.startTime : new Date()
+    const timeLeft = useCountdown(startTime)
 
     if (!event) {
         return (
@@ -23,7 +25,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
         )
     }
 
-    const timeLeft = useCountdown(event.startTime)
+
 
     const getStatusColor = () => {
         switch (event.status) {

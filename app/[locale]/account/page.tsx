@@ -98,7 +98,7 @@ export default function AccountPage() {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="font-medium">{t('outbidAlerts')}</p>
-                                <p className="text-sm text-muted-foreground">Get notified when you're outbid</p>
+                                <p className="text-sm text-muted-foreground">Get notified when you&apos;re outbid</p>
                             </div>
                             <button
                                 onClick={() => setOutbidAlerts(!outbidAlerts)}

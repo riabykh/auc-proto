@@ -27,13 +27,15 @@ import {
 export default function ItemPage({ params }: { params: { id: string } }) {
     const { items, user, isInWatchlist, addToWatchlist, removeFromWatchlist } = useAuction()
     const item = items.find(i => i.id === params.id)
+    const endsAt = item ? item.endsAt : new Date()
+    const timeLeft = useCountdown(endsAt)
     const router = useRouter()
     const t = useTranslations('item')
 
 
     if (!item) return <div className="container py-8">Item not found</div>
 
-    const timeLeft = useCountdown(item.endsAt)
+
     const isUserWinning = item.bids[0]?.userId === user.id
     const isEndingSoon = timeLeft.totalSeconds < 300
 

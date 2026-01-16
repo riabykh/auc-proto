@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ScanLine, CheckCircle2, XCircle, Package } from "lucide-react"
 import { useAuction } from "@/lib/auction-store"
+import { Badge } from "@/components/ui/badge"
 
 export default function ScannerPage() {
     const { orders } = useAuction()
@@ -33,7 +34,7 @@ export default function ScannerPage() {
         <div className="max-w-md mx-auto space-y-6">
             <div className="text-center space-y-2">
                 <h1 className="text-3xl font-bold">QR Scanner</h1>
-                <p className="text-muted-foreground">Scan buyer's QR code to verify payment and release items.</p>
+                <p className="text-muted-foreground">Scan buyer&apos;s QR code to verify payment and release items.</p>
             </div>
 
             <Card className="border-2 border-dashed border-slate-300 bg-slate-50">
@@ -116,7 +117,7 @@ export default function ScannerPage() {
                             <div>
                                 <h3 className="font-bold text-red-900">Invalid Code</h3>
                                 <p className="text-red-800 text-sm">
-                                    Code "{code}" not found. Please check and try again.
+                                    Code &quot;{code}&quot; not found. Please check and try again.
                                 </p>
                             </div>
                         </div>
