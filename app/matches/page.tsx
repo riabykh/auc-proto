@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -12,6 +13,11 @@ import { Heart, ExternalLink } from "lucide-react";
 export default function MatchesPage() {
   const router = useRouter();
   const matches = useSwipeStore((s) => s.matches);
+  const [now, setNow] = useState<number>(0);
+
+  useEffect(() => {
+    setNow(Date.now());
+  }, [matches]);
 
   const matchedCharacters = matches
     .map((m) => ({
@@ -102,7 +108,7 @@ export default function MatchesPage() {
             {/* Match list */}
             <div className="px-5 space-y-2 pb-4">
               {matchedCharacters.map((char) => {
-                const timeAgo = getTimeAgo(char.matchTimestamp);
+                const timeAgo = now ? getTimeAgo(char.matchTimestamp, now) : "";
                 return (
                   <motion.button
                     key={char.id}
@@ -153,8 +159,8 @@ export default function MatchesPage() {
   );
 }
 
-function getTimeAgo(timestamp: number): string {
-  const seconds = Math.floor((Date.now() - timestamp) / 1000);
+function getTimeAgo(timestamp: number, now: number): string {
+  const seconds = Math.floor((now - timestamp) / 1000);
   if (seconds < 60) return "Just now";
   const minutes = Math.floor(seconds / 60);
   if (minutes < 60) return `${minutes}m ago`;

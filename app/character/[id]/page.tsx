@@ -32,15 +32,12 @@ export default function CharacterProfile({
     );
   }
 
-  const personalityScore = Math.round(
-    (character.compatibility || 85) + (Math.random() * 6 - 3)
-  );
-  const interestScore = Math.round(
-    (character.compatibility || 85) - 5 + (Math.random() * 4)
-  );
-  const vibeScore = Math.round(
-    (character.compatibility || 85) - 2 + (Math.random() * 8 - 4)
-  );
+  // Deterministic scores derived from character id to avoid hydration mismatch
+  const base = character.compatibility || 85;
+  const idSum = character.id.split("").reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+  const personalityScore = Math.min(99, Math.max(60, base + ((idSum * 3) % 7) - 3));
+  const interestScore = Math.min(99, Math.max(60, base - 5 + ((idSum * 7) % 5)));
+  const vibeScore = Math.min(99, Math.max(60, base - 2 + ((idSum * 11) % 9) - 4));
 
   const reviews = [
     { user: "Alex M.", rating: 5, text: "Amazing conversations! So immersive." },

@@ -12,15 +12,14 @@ interface MatchAnimationProps {
   onKeepSwiping: () => void;
 }
 
-function Particle({ delay, x, y }: { delay: number; x: number; y: number }) {
+function Particle({ delay, x, y, even }: { delay: number; x: number; y: number; even: boolean }) {
   return (
     <motion.div
       className="absolute h-2 w-2 rounded-full"
       style={{
-        background:
-          Math.random() > 0.5
-            ? "var(--accent-primary)"
-            : "var(--accent-secondary)",
+        background: even
+          ? "var(--accent-primary)"
+          : "var(--accent-secondary)",
         left: "50%",
         top: "50%",
       }}
@@ -50,9 +49,9 @@ export default function MatchAnimation({
 
   const particles = Array.from({ length: 20 }, (_, i) => ({
     id: i,
-    delay: Math.random() * 0.3,
-    x: (Math.random() - 0.5) * 300,
-    y: (Math.random() - 0.5) * 300,
+    delay: (i % 6) * 0.05,
+    x: Math.cos(i * 1.256) * 150,
+    y: Math.sin(i * 0.942) * 150,
   }));
 
   return (
@@ -75,7 +74,7 @@ export default function MatchAnimation({
           <div className="relative z-10 flex flex-col items-center px-8">
             {/* Particles */}
             {particles.map((p) => (
-              <Particle key={p.id} delay={p.delay} x={p.x} y={p.y} />
+              <Particle key={p.id} delay={p.delay} x={p.x} y={p.y} even={p.id % 2 === 0} />
             ))}
 
             {/* Title */}

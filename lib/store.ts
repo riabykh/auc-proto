@@ -43,7 +43,7 @@ function shuffleArray<T>(array: T[]): T[] {
 export const useSwipeStore = create<SwipeState>()(
   persist(
     (set, get) => ({
-      characters: shuffleArray(allCharacters),
+      characters: allCharacters,
       currentIndex: 0,
       matches: [],
       passed: [],
