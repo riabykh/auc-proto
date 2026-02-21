@@ -1,19 +1,21 @@
-const withNextIntl = require('next-intl/plugin')();
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'images.unsplash.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'api.dicebear.com',
-            },
-        ],
-    },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "api.dicebear.com",
+      },
+    ],
+  },
 };
 
-module.exports = withNextIntl(nextConfig);
+module.exports = nextConfig;
